@@ -17,15 +17,20 @@ namespace FourierDraft
             InitializeComponent();
         }
 
-        Image img = new Image();
-        Bitmap originBmp = new Bitmap(500, 500);
+        BWImg img = new BWImg();
+        Bitmap bmp;
         private void buttonImportPic_Click(object sender, EventArgs e)
         {
             if (openPic.ShowDialog() == DialogResult.OK)
             {
-                originPicBox.ImageLocation = openPic.FileName;
+                originPicBox.LoadAsync(openPic.FileName);
             }
-            if (null != originPicBox.Image) originBmp = (Bitmap)originPicBox.Image;
+        }
+        private void originPicBox_LoadCompleted(object sender, AsyncCompletedEventArgs e)
+        {
+            img.ImgInit(originPicBox.Image, ref bmp);
+            img.BWConvert(ref bmp, barThreshold.Value);
+            bwPicBox.Image = bmp;
         }
 
         //滚动条与文本框结合
@@ -38,9 +43,10 @@ namespace FourierDraft
             try
             {
                 barThreshold.Value = Convert.ToInt32(textThreshold.Text);
+                img.BWConvert(ref bmp, barThreshold.Value);
+                bwPicBox.Image = bmp;
             }
             catch { };
-            originPicBox.Image = img.BWConvert(originBmp, barThreshold.Value);
         }
     }
 }

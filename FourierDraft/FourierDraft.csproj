@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Edge.cs" />
-    <Compile Include="Image.cs" />
+    <Compile Include="BWImg.cs" />
     <Compile Include="mainForm.cs">
       <SubType>Form</SubType>
     </Compile>

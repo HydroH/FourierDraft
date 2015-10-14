@@ -41,12 +41,15 @@
             this.bwPicBox = new System.Windows.Forms.PictureBox();
             this.tabEdge = new System.Windows.Forms.TabPage();
             this.tabCurve = new System.Windows.Forms.TabPage();
+            this.edgePicBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.originPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barThreshold)).BeginInit();
             this.tabPicBox.SuspendLayout();
             this.tabOrigin.SuspendLayout();
             this.tabBW.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bwPicBox)).BeginInit();
+            this.tabEdge.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edgePicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // originPicBox
@@ -72,9 +75,9 @@
             // 
             // openPic
             // 
-            this.openPic.Filter = "Image files (*.jpg, *.jpeg, *.jpe, *.jfif, *.png) | *.jpg; *.jpeg; *.jpe; *.jfif;" +
-    " *.png|JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jp" +
-    "g|GIF Files (*.gif)|*.gif";
+            this.openPic.Filter = "Image files (*.jpg, *.jpeg, *png, *.gif) | *.jpg; *.jpeg; *.jpe; *.jfif; *.png|JP" +
+    "EG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Fil" +
+    "es (*.gif)|*.gif";
             this.openPic.Title = "Select a Image...";
             // 
             // barThreshold
@@ -157,23 +160,33 @@
             // 
             // tabEdge
             // 
+            this.tabEdge.BackColor = System.Drawing.Color.Transparent;
+            this.tabEdge.Controls.Add(this.edgePicBox);
             this.tabEdge.Location = new System.Drawing.Point(4, 26);
             this.tabEdge.Name = "tabEdge";
             this.tabEdge.Padding = new System.Windows.Forms.Padding(3);
             this.tabEdge.Size = new System.Drawing.Size(282, 285);
             this.tabEdge.TabIndex = 2;
             this.tabEdge.Text = "Edge";
-            this.tabEdge.UseVisualStyleBackColor = true;
             // 
             // tabCurve
             // 
+            this.tabCurve.BackColor = System.Drawing.Color.Transparent;
             this.tabCurve.Location = new System.Drawing.Point(4, 26);
             this.tabCurve.Name = "tabCurve";
             this.tabCurve.Padding = new System.Windows.Forms.Padding(3);
             this.tabCurve.Size = new System.Drawing.Size(282, 285);
             this.tabCurve.TabIndex = 3;
             this.tabCurve.Text = "Curve";
-            this.tabCurve.UseVisualStyleBackColor = true;
+            // 
+            // edgePicBox
+            // 
+            this.edgePicBox.Location = new System.Drawing.Point(0, 2);
+            this.edgePicBox.Name = "edgePicBox";
+            this.edgePicBox.Size = new System.Drawing.Size(280, 280);
+            this.edgePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.edgePicBox.TabIndex = 2;
+            this.edgePicBox.TabStop = false;
             // 
             // mainForm
             // 
@@ -194,6 +207,8 @@
             this.tabOrigin.ResumeLayout(false);
             this.tabBW.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.bwPicBox)).EndInit();
+            this.tabEdge.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.edgePicBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -213,6 +228,7 @@
         private System.Windows.Forms.TabPage tabEdge;
         private System.Windows.Forms.TabPage tabCurve;
         private System.Windows.Forms.PictureBox bwPicBox;
+        private System.Windows.Forms.PictureBox edgePicBox;
     }
 }
 

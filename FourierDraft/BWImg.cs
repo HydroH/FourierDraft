@@ -18,26 +18,28 @@ namespace FourierDraft
     {
         //图像初始化，建立灰度索引
         const int resizePixel = 500;
-        private int imgWidth, imgHeight;
+        private int bmpWidth, bmpHeight;
         private Bitmap originBmp;
         private List<BmpPoint>[] greynessIndex = new List<BmpPoint>[256];
         public void ImgInit(Image img, ref Bitmap bmp)
         {
-            if (img.Width > resizePixel)
+            bmpWidth = img.Width;
+            bmpHeight = img.Height;
+            if (bmpWidth > resizePixel)
             {
-                imgWidth = resizePixel;
-                imgHeight = resizePixel * img.Height / img.Width;
+                bmpHeight = resizePixel * bmpHeight / bmpWidth;
+                bmpWidth = resizePixel;
             }
-            if (imgHeight > resizePixel)
+            if (bmpHeight > resizePixel)
             {
-                imgWidth = resizePixel * imgWidth / imgHeight;
-                imgHeight = resizePixel;
+                bmpWidth = resizePixel * bmpWidth / bmpHeight;
+                bmpHeight = resizePixel;
             }
-            bmp = new Bitmap(img, imgWidth, imgHeight);
+            bmp = new Bitmap(img, bmpWidth, bmpHeight);
             for (int i = 0; i <= 255; i++) greynessIndex[i] = new List<BmpPoint>();
             originBmp = new Bitmap(bmp);
-            for (int i = 0; i <= imgWidth - 1; i++) 
-                for (int j = 0; j <= imgHeight - 1; j++)
+            for (int i = 0; i <= bmpWidth - 1; i++) 
+                for (int j = 0; j <= bmpHeight - 1; j++)
                 {
                     Color currColor = bmp.GetPixel(i, j);
                     int greyness = (currColor.R + currColor.G + currColor.B) / 3;
@@ -45,6 +47,7 @@ namespace FourierDraft
                     greynessIndex[greyness].Add(currPoint);
                     bmp.SetPixel(i, j, Color.White);
                 }
+            oldThresh = 0;
         }
 
         //图像二值化

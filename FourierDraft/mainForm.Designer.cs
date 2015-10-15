@@ -40,8 +40,8 @@
             this.tabBW = new System.Windows.Forms.TabPage();
             this.bwPicBox = new System.Windows.Forms.PictureBox();
             this.tabEdge = new System.Windows.Forms.TabPage();
-            this.tabCurve = new System.Windows.Forms.TabPage();
             this.edgePicBox = new System.Windows.Forms.PictureBox();
+            this.tabCurve = new System.Windows.Forms.TabPage();
             ((System.ComponentModel.ISupportInitialize)(this.originPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barThreshold)).BeginInit();
             this.tabPicBox.SuspendLayout();
@@ -168,6 +168,16 @@
             this.tabEdge.Size = new System.Drawing.Size(282, 285);
             this.tabEdge.TabIndex = 2;
             this.tabEdge.Text = "Edge";
+            this.tabEdge.Enter += new System.EventHandler(this.tabEdge_Enter);
+            // 
+            // edgePicBox
+            // 
+            this.edgePicBox.Location = new System.Drawing.Point(0, 2);
+            this.edgePicBox.Name = "edgePicBox";
+            this.edgePicBox.Size = new System.Drawing.Size(280, 280);
+            this.edgePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.edgePicBox.TabIndex = 2;
+            this.edgePicBox.TabStop = false;
             // 
             // tabCurve
             // 
@@ -178,15 +188,6 @@
             this.tabCurve.Size = new System.Drawing.Size(282, 285);
             this.tabCurve.TabIndex = 3;
             this.tabCurve.Text = "Curve";
-            // 
-            // edgePicBox
-            // 
-            this.edgePicBox.Location = new System.Drawing.Point(0, 2);
-            this.edgePicBox.Name = "edgePicBox";
-            this.edgePicBox.Size = new System.Drawing.Size(280, 280);
-            this.edgePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.edgePicBox.TabIndex = 2;
-            this.edgePicBox.TabStop = false;
             // 
             // mainForm
             // 

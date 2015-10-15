@@ -13,8 +13,8 @@ namespace FourierDraft
         }
 
         //图片载入
-        BWImg img = new BWImg();
-        Bitmap bmp;
+        CurveImg img = new CurveImg();
+        Bitmap bwBmp, edgeBmp;
         private void buttonImportPic_Click(object sender, EventArgs e)
         {
             if (openPic.ShowDialog() == DialogResult.OK)
@@ -24,9 +24,12 @@ namespace FourierDraft
         }
         private void originPicBox_LoadCompleted(object sender, AsyncCompletedEventArgs e)
         {
-            img.ImgInit(originPicBox.Image, ref bmp);
-            img.BWConvert(ref bmp, barThreshold.Value);
-            bwPicBox.Image = bmp;
+            img.ImgInit(originPicBox.Image, ref bwBmp);
+            img.BWConvert(ref bwBmp, barThreshold.Value);
+            bwPicBox.Image = bwBmp;
+            edgeBmp = new Bitmap(bwBmp);
+            img.PreviewEdge(ref edgeBmp);
+            edgePicBox.Image = edgeBmp;
         }
 
         //滚动条与文本框结合
@@ -34,15 +37,26 @@ namespace FourierDraft
         {
             textThreshold.Text = Convert.ToString(barThreshold.Value);
         }
+
+        private void tabEdge_Enter(object sender, EventArgs e)
+        {
+            edgeBmp = new Bitmap(bwBmp);
+            img.PreviewEdge(ref edgeBmp);
+            edgePicBox.Image = edgeBmp;
+        }
+
         private void textThreshold_TextChanged(object sender, EventArgs e)
         {
             try
             {
                 barThreshold.Value = Convert.ToInt32(textThreshold.Text);
-                img.BWConvert(ref bmp, barThreshold.Value);
-                bwPicBox.Image = bmp;
             }
             catch { };
+            img.BWConvert(ref bwBmp, barThreshold.Value);
+            bwPicBox.Image = bwBmp;
+            edgeBmp = new Bitmap(bwBmp);
+            img.PreviewEdge(ref edgeBmp);
+            edgePicBox.Image = edgeBmp;
         }
     }
 }

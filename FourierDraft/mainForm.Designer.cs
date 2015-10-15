@@ -137,6 +137,7 @@
             this.tabOrigin.Size = new System.Drawing.Size(282, 285);
             this.tabOrigin.TabIndex = 0;
             this.tabOrigin.Text = "Original";
+            this.tabOrigin.Enter += new System.EventHandler(this.tabOrigin_Enter);
             // 
             // tabBW
             // 
@@ -148,6 +149,7 @@
             this.tabBW.Size = new System.Drawing.Size(282, 285);
             this.tabBW.TabIndex = 1;
             this.tabBW.Text = "Black&White";
+            this.tabBW.Enter += new System.EventHandler(this.tabBW_Enter);
             // 
             // bwPicBox
             // 
@@ -188,6 +190,7 @@
             this.tabCurve.Size = new System.Drawing.Size(282, 285);
             this.tabCurve.TabIndex = 3;
             this.tabCurve.Text = "Curve";
+            this.tabCurve.Enter += new System.EventHandler(this.tabCurve_Enter);
             // 
             // mainForm
             // 

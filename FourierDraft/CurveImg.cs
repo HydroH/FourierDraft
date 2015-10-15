@@ -18,9 +18,9 @@ namespace FourierDraft
     class CurveImg
     {
         //图像初始化，建立灰度索引&边缘点索引
-        const int resizePixel = 300;
+        const int resizePixel = 450; //放肆！
         private int bmpWidth, bmpHeight;
-        private Bitmap originBmp;
+        private Bitmap originBmp, whiteBmp;
         private bool[,] isBlack;
         private List<BmpPoint>[] greynessIndex = new List<BmpPoint>[256];
         private List<BmpPoint>[] edgePointIndex = new List<BmpPoint>[256];
@@ -62,17 +62,18 @@ namespace FourierDraft
                         continue;
                     }
                     int newGreyness;
-                    currColor = bmp.GetPixel(i - 1, j);
+                    currColor = originBmp.GetPixel(i - 1, j);
                     newGreyness = currColor.R + currColor.G + currColor.B;
-                    currColor = bmp.GetPixel(i + 1, j);
+                    currColor = originBmp.GetPixel(i + 1, j);
                     newGreyness = Math.Max(newGreyness, currColor.R + currColor.G + currColor.B);
-                    currColor = bmp.GetPixel(i, j - 1);
+                    currColor = originBmp.GetPixel(i, j - 1);
                     newGreyness = Math.Max(newGreyness, currColor.R + currColor.G + currColor.B);
-                    currColor = bmp.GetPixel(i, j + 1);
+                    currColor = originBmp.GetPixel(i, j + 1);
                     newGreyness = Math.Max(newGreyness, currColor.R + currColor.G + currColor.B);
-                    for (int k = greyness / 3; k <= newGreyness / 3 - 1; k++) edgePointIndex[k].Add(currPoint);
+                    for (int k = greyness / 3 + 1; k <= newGreyness / 3; k++) edgePointIndex[k].Add(currPoint);
                 }
             oldThresh = 0;
+            whiteBmp = new Bitmap(bmp);
         }
 
         //图像二值化
@@ -106,50 +107,11 @@ namespace FourierDraft
         }
 
         //预览边缘
-        public void PreviewEdge(ref Bitmap bmp)
+        public void PreviewEdge(ref Bitmap bmp, int threshold)
         {
-            /*
-            int maxX = bmp.Width;
-            int maxY = bmp.Height;
-            Bitmap tempBmp = new Bitmap(bmp);
-            for (int i = 0; i <= oldThresh - 1; i++)
-                for (int j = 0; j <= greynessIndex[i].Count - 1; j++)
-                {
-                    int x = greynessIndex[i][j].x;
-                    int y = greynessIndex[i][j].y;
-                    if (x == 0 || x == maxX - 1 || y == 0 || y == maxY - 1)
-                    {
-                        bmp.SetPixel(x, y, Color.Black);
-                        continue;
-                    }
-                    if (!isBlack[x - 1, y])
-                    {
-                        bmp.SetPixel(x, y, Color.Black);
-                        continue;
-                    }
-                    if (!isBlack[x + 1, y])
-                    {
-                        bmp.SetPixel(x, y, Color.Black);
-                        continue;
-                    }
-                    if (!isBlack[x, y - 1])
-                    {
-                        bmp.SetPixel(x, y, Color.Black);
-                        continue;
-                    }
-                    if (!isBlack[x, y + 1])
-                    {
-                        bmp.SetPixel(x, y, Color.Black);
-                        continue;
-                    }
-                    bmp.SetPixel(x, y, Color.White);
-                }
-                */
-            for (int i = 0; i <= bmp.Width - 1; i++)
-                for (int j = 0; j <= bmp.Height - 1; j++)
-                    bmp.SetPixel(i, j, Color.White);
-            for (int j = 0; j <= edgePointIndex[oldThresh].Count - 1; j++)
-                bmp.SetPixel(edgePointIndex[oldThresh][j].x, edgePointIndex[oldThresh][j].y, Color.Black);
+            bmp = new Bitmap(whiteBmp);
+            for (int j = 0; j <= edgePointIndex[threshold].Count - 1; j++)
+                bmp.SetPixel(edgePointIndex[threshold][j].x, edgePointIndex[threshold][j].y, Color.Black);
         }
 
         //判定边缘点

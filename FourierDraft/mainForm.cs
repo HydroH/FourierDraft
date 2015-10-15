@@ -28,7 +28,7 @@ namespace FourierDraft
             img.BWConvert(ref bwBmp, barThreshold.Value);
             bwPicBox.Image = bwBmp;
             edgeBmp = new Bitmap(bwBmp);
-            img.PreviewEdge(ref edgeBmp);
+            img.PreviewEdge(ref edgeBmp, barThreshold.Value);
             edgePicBox.Image = edgeBmp;
         }
 
@@ -38,11 +38,36 @@ namespace FourierDraft
             textThreshold.Text = Convert.ToString(barThreshold.Value);
         }
 
+        //图片框显示
+        bool bwShowing = false;
+        bool edgeShowing = false;
+
+        private void tabOrigin_Enter(object sender, EventArgs e)
+        {
+            bwShowing = false;
+            edgeShowing = false;
+        }
+
+        private void tabBW_Enter(object sender, EventArgs e)
+        {
+            img.BWConvert(ref bwBmp, barThreshold.Value);
+            bwPicBox.Image = bwBmp;
+            bwShowing = true;
+            edgeShowing = false;
+        }
+
         private void tabEdge_Enter(object sender, EventArgs e)
         {
-            edgeBmp = new Bitmap(bwBmp);
-            img.PreviewEdge(ref edgeBmp);
+            img.PreviewEdge(ref edgeBmp, barThreshold.Value);
             edgePicBox.Image = edgeBmp;
+            bwShowing = false;
+            edgeShowing = true;
+        }
+
+        private void tabCurve_Enter(object sender, EventArgs e)
+        {
+            bwShowing = false;
+            edgeShowing = false;
         }
 
         private void textThreshold_TextChanged(object sender, EventArgs e)
@@ -52,11 +77,16 @@ namespace FourierDraft
                 barThreshold.Value = Convert.ToInt32(textThreshold.Text);
             }
             catch { };
-            img.BWConvert(ref bwBmp, barThreshold.Value);
-            bwPicBox.Image = bwBmp;
-            edgeBmp = new Bitmap(bwBmp);
-            img.PreviewEdge(ref edgeBmp);
-            edgePicBox.Image = edgeBmp;
+            if (bwShowing)
+            {
+                img.BWConvert(ref bwBmp, barThreshold.Value);
+                bwPicBox.Image = bwBmp;
+            }
+            if (edgeShowing)
+            {
+                img.PreviewEdge(ref edgeBmp, barThreshold.Value);
+                edgePicBox.Image = edgeBmp;
+            }
         }
     }
 }

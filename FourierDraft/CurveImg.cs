@@ -27,16 +27,16 @@ namespace FourierDraft
         {
             bmpWidth = img.Width;
             bmpHeight = img.Height;
-            if (bmpWidth > resizePixel)
-            {
-                bmpHeight = resizePixel * bmpHeight / bmpWidth;
-                bmpWidth = resizePixel;
-            }
+
+            bmpHeight = resizePixel * bmpHeight / bmpWidth;
+            bmpWidth = resizePixel;
+
             if (bmpHeight > resizePixel)
             {
                 bmpWidth = resizePixel * bmpWidth / bmpHeight;
                 bmpHeight = resizePixel;
             }
+
             isBlack = new bool[bmpWidth, bmpHeight];
             bmp = new Bitmap(img, bmpWidth, bmpHeight);
             for (int i = 0; i <= 255; i++)

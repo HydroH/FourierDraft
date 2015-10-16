@@ -106,14 +106,14 @@ namespace FourierDraft
         {
             if (null != originPicBox.Image)
             {
-                FourierCurve curve = new FourierCurve();
+                FourierCurve[] curves = new FourierCurve[img.EdgeIndex.Count];
                 img.BWConvert(ref bwBmp, barThreshold.Value);
                 edgeBmp = new Bitmap(bwBmp);
                 img.FindEdge(ref edgeBmp);
                 textResult.Text = "";
                 for (int i = 0; i <= img.EdgeIndex.Count - 1; i++)
                 {
-                    textResult.Text += curve.FourierExpand(img.EdgeIndex[i], barLevel.Value);
+                    textResult.Text += curves[i].FourierExpand(img.EdgeIndex[i], barLevel.Value);
                 }
             }
         }

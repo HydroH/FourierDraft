@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace FourierDraft
 {
@@ -18,9 +15,10 @@ namespace FourierDraft
         private string resultText;
         public string FourierExpand(List<BmpPoint> curvePoint, int expansionLevel)
         {
+            period = curvePoint.Count;
+            if (period <= 6) return "";
             curveCoX = new Coefficient[expansionLevel+1];
             curveCoY = new Coefficient[expansionLevel+1];
-            period = curvePoint.Count;
             curveCoX[0].sin = curvePoint[0].y;
             curveCoY[0].sin = curvePoint[0].x;
             for (int i = 0; i <= period - 1; i++)
@@ -56,9 +54,9 @@ namespace FourierDraft
                     resultText += Convert.ToString(Math.Round(curveCoX[i].sin, 4));
                     resultText += "sin(" + Convert.ToString(i) + "t)";
                 }
-                resultText += '\n';
+                resultText += "\r\n";
             }
-
+            
             resultText += "y = ";
             resultText += Convert.ToString(curveCoY[0].sin);
             for (int i = 1; i <= expansionLevel; i++) 
@@ -83,8 +81,9 @@ namespace FourierDraft
                     resultText += Convert.ToString(Math.Round(curveCoY[i].sin, 4));
                     resultText += "sin(" + Convert.ToString(i) + "t)";
                 }
-                resultText += '\n';
+                resultText += "\r\n";
             }
+            resultText += "\r\n";
             return resultText;
         }
     }

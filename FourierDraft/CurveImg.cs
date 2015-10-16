@@ -224,28 +224,30 @@ namespace FourierDraft
         //绘制曲线
         public void DrawCurve(Coefficient[] curveCoX, Coefficient[] curveCoY, int period, ref Bitmap bmp)
         {
-            double x;
-            double y;
+            double x, y;
+            int intx, inty;
             double tempDouble;
-            for (int i = 0; i <= period - 1; i++)
-            { 
-                x = 0;
-                y = 0;
-                for (int j = 0; j <= curveCoX.Length - 1; j++) 
+            const int accuracy = 10;
+            for (int i = 0; i <= period * accuracy - 1; i++) 
+            {
+                if (null == curveCoX) continue;
+                x = curveCoX[0].cos / 2;
+                y = curveCoY[0].cos / 2;
+                for (int j = 1; j <= curveCoX.Length - 1; j++) 
                 {
-                    tempDouble = 2 * Math.PI * j * x;
+                    tempDouble = 2 * Math.PI * j * i / accuracy;
                     tempDouble /= period;
                     x += curveCoX[j].cos * Math.Cos(tempDouble);
                     x += curveCoX[j].sin * Math.Sin(tempDouble);
-                    tempDouble = 2 * Math.PI * j * y;
+                    tempDouble = 2 * Math.PI * j * i / accuracy;
                     tempDouble /= period;
                     y += curveCoY[j].cos * Math.Cos(tempDouble);
                     y += curveCoY[j].sin * Math.Sin(tempDouble);
                 }
-                x = -x;
-                y = -y;
-                if ((x < 0) || (x >= bmp.Width) || (y < 0) || (y >= bmp.Height)) continue;
-                bmp.SetPixel((int)x, (int)y, Color.Black);
+                intx = (int)Math.Round(x);
+                inty = (int)Math.Round(y);
+                if ((intx < 0) || (intx >= bmp.Width) || (inty < 0) || (inty >= bmp.Height)) continue;
+                bmp.SetPixel(intx, inty, Color.Black);
             }
         }
     }

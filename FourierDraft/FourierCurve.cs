@@ -32,24 +32,26 @@ namespace FourierDraft
             if (period <= 6) return "";
             curveCoX = new Coefficient[expansionLevel+1];
             curveCoY = new Coefficient[expansionLevel+1];
-            curveCoX[0].sin = curvePoint[0].y;
-            curveCoY[0].sin = curvePoint[0].x;
             double tempDouble;
             for (int i = 0; i <= period - 1; i++)
-                for (int j = 1; j <= expansionLevel; j++)
+                for (int j = 0; j <= expansionLevel; j++)
                 {
-                    tempDouble = 2 * Math.PI * (j + 1) * curvePoint[i].x;
+                    tempDouble = 2 * Math.PI * j * i;
                     tempDouble /= period;
                     curveCoX[j].cos += curvePoint[i].x * Math.Cos(tempDouble);
                     curveCoX[j].sin += curvePoint[i].x * Math.Sin(tempDouble);
-                    tempDouble = 2 * Math.PI * (j + 1) * curvePoint[i].y;
+                    tempDouble = 2 * Math.PI * j * i;
                     tempDouble /= period;
                     curveCoY[j].cos += curvePoint[i].y * Math.Cos(tempDouble);
                     curveCoY[j].sin += curvePoint[i].y * Math.Sin(tempDouble);
                 }
 
+            curveCoX[0].cos *= 2;
+            curveCoX[0].cos /= period;
+            curveCoY[0].cos *= 2;
+            curveCoY[0].cos /= period;
             resultText = "x = ";
-            resultText += Convert.ToString(curveCoX[0].sin);
+            resultText += Convert.ToString(Math.Round(curveCoX[0].cos, 4));
             for (int i = 1; i <= expansionLevel; i++)
             {
                 curveCoX[i].cos *= 2;
@@ -76,7 +78,7 @@ namespace FourierDraft
             }
             
             resultText += "y = ";
-            resultText += Convert.ToString(curveCoY[0].sin);
+            resultText += Convert.ToString(Math.Round(curveCoY[0].cos, 4));
             for (int i = 1; i <= expansionLevel; i++) 
             {
                 curveCoY[i].cos *= 2;

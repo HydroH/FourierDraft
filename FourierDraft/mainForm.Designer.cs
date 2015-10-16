@@ -42,12 +42,12 @@
             this.tabEdge = new System.Windows.Forms.TabPage();
             this.edgePicBox = new System.Windows.Forms.PictureBox();
             this.tabCurve = new System.Windows.Forms.TabPage();
+            this.curvePicBox = new System.Windows.Forms.PictureBox();
             this.buttonCalc = new System.Windows.Forms.Button();
             this.labelLevel = new System.Windows.Forms.Label();
             this.textLevel = new System.Windows.Forms.TextBox();
             this.barLevel = new System.Windows.Forms.TrackBar();
             this.textResult = new System.Windows.Forms.TextBox();
-            this.curvePicBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.originPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barThreshold)).BeginInit();
             this.tabPicBox.SuspendLayout();
@@ -57,8 +57,8 @@
             this.tabEdge.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edgePicBox)).BeginInit();
             this.tabCurve.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.barLevel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.curvePicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barLevel)).BeginInit();
             this.SuspendLayout();
             // 
             // originPicBox
@@ -202,6 +202,15 @@
             this.tabCurve.Text = "Curve";
             this.tabCurve.Enter += new System.EventHandler(this.tabCurve_Enter);
             // 
+            // curvePicBox
+            // 
+            this.curvePicBox.Location = new System.Drawing.Point(0, 2);
+            this.curvePicBox.Name = "curvePicBox";
+            this.curvePicBox.Size = new System.Drawing.Size(280, 280);
+            this.curvePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.curvePicBox.TabIndex = 3;
+            this.curvePicBox.TabStop = false;
+            // 
             // buttonCalc
             // 
             this.buttonCalc.BackColor = System.Drawing.SystemColors.Control;
@@ -238,12 +247,12 @@
             // barLevel
             // 
             this.barLevel.Location = new System.Drawing.Point(448, 93);
-            this.barLevel.Maximum = 30;
+            this.barLevel.Maximum = 128;
             this.barLevel.Minimum = 1;
             this.barLevel.Name = "barLevel";
             this.barLevel.Size = new System.Drawing.Size(311, 45);
             this.barLevel.TabIndex = 7;
-            this.barLevel.TickFrequency = 2;
+            this.barLevel.TickFrequency = 8;
             this.barLevel.Value = 10;
             this.barLevel.Scroll += new System.EventHandler(this.barLevel_Scroll);
             // 
@@ -259,15 +268,6 @@
             this.textResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textResult.Size = new System.Drawing.Size(445, 156);
             this.textResult.TabIndex = 10;
-            // 
-            // curvePicBox
-            // 
-            this.curvePicBox.Location = new System.Drawing.Point(0, 2);
-            this.curvePicBox.Name = "curvePicBox";
-            this.curvePicBox.Size = new System.Drawing.Size(280, 280);
-            this.curvePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.curvePicBox.TabIndex = 3;
-            this.curvePicBox.TabStop = false;
             // 
             // mainForm
             // 
@@ -296,8 +296,8 @@
             this.tabEdge.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.edgePicBox)).EndInit();
             this.tabCurve.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.barLevel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.curvePicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barLevel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

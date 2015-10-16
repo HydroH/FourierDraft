@@ -32,12 +32,6 @@ namespace FourierDraft
             edgePicBox.Image = edgeBmp;
         }
 
-        //滚动条与文本框结合
-        private void barThreshold_Scroll(object sender, EventArgs e)
-        {
-            textThreshold.Text = Convert.ToString(barThreshold.Value);
-        }
-
         //图片框显示
         bool bwShowing = false;
         bool edgeShowing = false;
@@ -70,6 +64,11 @@ namespace FourierDraft
             edgeShowing = false;
         }
 
+        //滚动条与文本框结合
+        private void barThreshold_Scroll(object sender, EventArgs e)
+        {
+            textThreshold.Text = Convert.ToString(barThreshold.Value);
+        }
         private void textThreshold_TextChanged(object sender, EventArgs e)
         {
             try
@@ -86,6 +85,36 @@ namespace FourierDraft
             {
                 img.PreviewEdge(ref edgeBmp, barThreshold.Value);
                 edgePicBox.Image = edgeBmp;
+            }
+        }
+
+        private void barLevel_Scroll(object sender, EventArgs e)
+        {
+            textLevel.Text = Convert.ToString(barLevel.Value);
+        }
+        private void textLevel_TextChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                barLevel.Value = Convert.ToInt32(textLevel.Text);
+            }
+            catch { };
+        }
+
+        //傅里叶展开
+        private void buttonCalc_Click(object sender, EventArgs e)
+        {
+            if (null != originPicBox.Image)
+            {
+                FourierCurve curve = new FourierCurve();
+                img.BWConvert(ref bwBmp, barThreshold.Value);
+                edgeBmp = new Bitmap(bwBmp);
+                img.FindEdge(ref edgeBmp);
+                textResult.Text = "";
+                for (int i = 0; i <= img.EdgeIndex.Count - 1; i++)
+                {
+                    textResult.Text += curve.FourierExpand(img.EdgeIndex[i], barLevel.Value);
+                }
             }
         }
     }

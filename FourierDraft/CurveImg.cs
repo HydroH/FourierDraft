@@ -6,8 +6,7 @@ namespace FourierDraft
 {
     struct BmpPoint
     {
-        public int x;
-        public int y;
+        public int x, y;
         public BmpPoint(int i, int j)
         {
             x = i;
@@ -124,48 +123,48 @@ namespace FourierDraft
         }
 
         //查找边缘点
-        private void FindNext(ref Bitmap bmp, ref int x, ref int y)
+        private void FindNext(ref Bitmap bmp, ref int x, ref int y, bool[,] visited)
         {
-            if (IsWhite(ref bmp, x, y - 1) && !IsWhite(ref bmp, x + 1, y - 1))
+            if (IsWhite(ref bmp, x, y - 1) && !IsWhite(ref bmp, x + 1, y - 1) && !visited[x + 1, y - 1]) 
             {
                 x += 1;
                 y -= 1;
                 return;
             }
-            if (IsWhite(ref bmp, x + 1, y - 1) && !IsWhite(ref bmp, x + 1, y))
+            if (IsWhite(ref bmp, x + 1, y - 1) && !IsWhite(ref bmp, x + 1, y) && !visited[x + 1, y])
             {
                 x += 1;
                 return;
             }
-            if (IsWhite(ref bmp, x + 1, y) && !IsWhite(ref bmp, x + 1, y + 1))
+            if (IsWhite(ref bmp, x + 1, y) && !IsWhite(ref bmp, x + 1, y + 1) && !visited[x + 1, y + 1])
             {
                 x += 1;
                 y += 1;
                 return;
             }
-            if (IsWhite(ref bmp, x + 1, y + 1) && !IsWhite(ref bmp, x, y + 1))
+            if (IsWhite(ref bmp, x + 1, y + 1) && !IsWhite(ref bmp, x, y + 1) && !visited[x, y + 1])
             {
                 y += 1;
                 return;
             }
-            if (IsWhite(ref bmp, x, y + 1) && !IsWhite(ref bmp, x - 1, y + 1))
+            if (IsWhite(ref bmp, x, y + 1) && !IsWhite(ref bmp, x - 1, y + 1) && !visited[x - 1, y + 1])
             {
                 x -= 1;
                 y += 1;
                 return;
             }
-            if (IsWhite(ref bmp, x - 1, y + 1) && !IsWhite(ref bmp, x - 1, y))
+            if (IsWhite(ref bmp, x - 1, y + 1) && !IsWhite(ref bmp, x - 1, y) && !visited[x - 1, y])
             {
                 x -= 1;
                 return;
             }
-            if (IsWhite(ref bmp, x - 1, y) && !IsWhite(ref bmp, x - 1, y - 1))
+            if (IsWhite(ref bmp, x - 1, y) && !IsWhite(ref bmp, x - 1, y - 1) && !visited[x - 1, y - 1])
             {
                 x -= 1;
                 y -= 1;
                 return;
             }
-            if (IsWhite(ref bmp, x - 1, y - 1) && !IsWhite(ref bmp, x, y - 1))
+            if (IsWhite(ref bmp, x - 1, y - 1) && !IsWhite(ref bmp, x, y - 1) && !visited[x, y - 1])
             {
                 y -= 1;
                 return;
@@ -178,7 +177,7 @@ namespace FourierDraft
             bool newEdge = true;
             int x0 = x;
             int y0 = y;
-            FindNext(ref bmp, ref x, ref y);
+            FindNext(ref bmp, ref x, ref y, visited);
             if ((x0 == x) && (y0 == y)) return;
             x = x0;
             y = y0;
@@ -188,7 +187,7 @@ namespace FourierDraft
                 newEdge = false;
                 visited[x, y] = true;
                 edgeIndex[edgeIndex.Count - 1].Add(new BmpPoint(x, y));
-                FindNext(ref bmp, ref x, ref y);
+                FindNext(ref bmp, ref x, ref y, visited);
                 if ((x0 == x) && (y0 == y)) break;
                 x0 = x;
                 y0 = y;

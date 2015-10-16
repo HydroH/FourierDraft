@@ -34,7 +34,7 @@
             this.openPic = new System.Windows.Forms.OpenFileDialog();
             this.barThreshold = new System.Windows.Forms.TrackBar();
             this.textThreshold = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelThreshold = new System.Windows.Forms.Label();
             this.tabPicBox = new System.Windows.Forms.TabControl();
             this.tabOrigin = new System.Windows.Forms.TabPage();
             this.tabBW = new System.Windows.Forms.TabPage();
@@ -42,6 +42,11 @@
             this.tabEdge = new System.Windows.Forms.TabPage();
             this.edgePicBox = new System.Windows.Forms.PictureBox();
             this.tabCurve = new System.Windows.Forms.TabPage();
+            this.buttonCalc = new System.Windows.Forms.Button();
+            this.labelLevel = new System.Windows.Forms.Label();
+            this.textLevel = new System.Windows.Forms.TextBox();
+            this.barLevel = new System.Windows.Forms.TrackBar();
+            this.textResult = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.originPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barThreshold)).BeginInit();
             this.tabPicBox.SuspendLayout();
@@ -50,6 +55,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bwPicBox)).BeginInit();
             this.tabEdge.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edgePicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barLevel)).BeginInit();
             this.SuspendLayout();
             // 
             // originPicBox
@@ -83,7 +89,7 @@
             // barThreshold
             // 
             this.barThreshold.LargeChange = 10;
-            this.barThreshold.Location = new System.Drawing.Point(448, 48);
+            this.barThreshold.Location = new System.Drawing.Point(448, 51);
             this.barThreshold.Maximum = 255;
             this.barThreshold.Name = "barThreshold";
             this.barThreshold.Size = new System.Drawing.Size(311, 45);
@@ -95,7 +101,7 @@
             // textThreshold
             // 
             this.textThreshold.Font = new System.Drawing.Font("微软雅黑 Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textThreshold.Location = new System.Drawing.Point(403, 48);
+            this.textThreshold.Location = new System.Drawing.Point(403, 51);
             this.textThreshold.MaxLength = 3;
             this.textThreshold.Name = "textThreshold";
             this.textThreshold.Size = new System.Drawing.Size(39, 29);
@@ -103,15 +109,15 @@
             this.textThreshold.Text = "127";
             this.textThreshold.TextChanged += new System.EventHandler(this.textThreshold_TextChanged);
             // 
-            // label1
+            // labelThreshold
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("微软雅黑 Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(310, 51);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(87, 21);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "Threshold:";
+            this.labelThreshold.AutoSize = true;
+            this.labelThreshold.Font = new System.Drawing.Font("微软雅黑 Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelThreshold.Location = new System.Drawing.Point(310, 54);
+            this.labelThreshold.Name = "labelThreshold";
+            this.labelThreshold.Size = new System.Drawing.Size(87, 21);
+            this.labelThreshold.TabIndex = 4;
+            this.labelThreshold.Text = "Threshold:";
             // 
             // tabPicBox
             // 
@@ -192,13 +198,75 @@
             this.tabCurve.Text = "Curve";
             this.tabCurve.Enter += new System.EventHandler(this.tabCurve_Enter);
             // 
+            // buttonCalc
+            // 
+            this.buttonCalc.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonCalc.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonCalc.Location = new System.Drawing.Point(314, 134);
+            this.buttonCalc.Name = "buttonCalc";
+            this.buttonCalc.Size = new System.Drawing.Size(75, 24);
+            this.buttonCalc.TabIndex = 6;
+            this.buttonCalc.Text = "Calculate!";
+            this.buttonCalc.UseVisualStyleBackColor = false;
+            this.buttonCalc.Click += new System.EventHandler(this.buttonCalc_Click);
+            // 
+            // labelLevel
+            // 
+            this.labelLevel.AutoSize = true;
+            this.labelLevel.Font = new System.Drawing.Font("微软雅黑 Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelLevel.Location = new System.Drawing.Point(310, 96);
+            this.labelLevel.Name = "labelLevel";
+            this.labelLevel.Size = new System.Drawing.Size(81, 21);
+            this.labelLevel.TabIndex = 9;
+            this.labelLevel.Text = "Accuracy:";
+            // 
+            // textLevel
+            // 
+            this.textLevel.Font = new System.Drawing.Font("微软雅黑 Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textLevel.Location = new System.Drawing.Point(403, 93);
+            this.textLevel.MaxLength = 3;
+            this.textLevel.Name = "textLevel";
+            this.textLevel.Size = new System.Drawing.Size(39, 29);
+            this.textLevel.TabIndex = 8;
+            this.textLevel.Text = "10";
+            this.textLevel.TextChanged += new System.EventHandler(this.textLevel_TextChanged);
+            // 
+            // barLevel
+            // 
+            this.barLevel.Location = new System.Drawing.Point(448, 93);
+            this.barLevel.Maximum = 30;
+            this.barLevel.Minimum = 1;
+            this.barLevel.Name = "barLevel";
+            this.barLevel.Size = new System.Drawing.Size(311, 45);
+            this.barLevel.TabIndex = 7;
+            this.barLevel.TickFrequency = 2;
+            this.barLevel.Value = 10;
+            this.barLevel.Scroll += new System.EventHandler(this.barLevel_Scroll);
+            // 
+            // textResult
+            // 
+            this.textResult.AcceptsReturn = true;
+            this.textResult.AcceptsTab = true;
+            this.textResult.BackColor = System.Drawing.Color.White;
+            this.textResult.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.textResult.Location = new System.Drawing.Point(314, 171);
+            this.textResult.Multiline = true;
+            this.textResult.Name = "textResult";
+            this.textResult.Size = new System.Drawing.Size(445, 156);
+            this.textResult.TabIndex = 10;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(770, 347);
+            this.Controls.Add(this.textResult);
+            this.Controls.Add(this.labelLevel);
+            this.Controls.Add(this.textLevel);
+            this.Controls.Add(this.barLevel);
+            this.Controls.Add(this.buttonCalc);
             this.Controls.Add(this.tabPicBox);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelThreshold);
             this.Controls.Add(this.textThreshold);
             this.Controls.Add(this.barThreshold);
             this.Controls.Add(this.buttonImportPic);
@@ -213,6 +281,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.bwPicBox)).EndInit();
             this.tabEdge.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.edgePicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barLevel)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -225,7 +294,7 @@
         private System.Windows.Forms.OpenFileDialog openPic;
         private System.Windows.Forms.TrackBar barThreshold;
         private System.Windows.Forms.TextBox textThreshold;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelThreshold;
         private System.Windows.Forms.TabControl tabPicBox;
         private System.Windows.Forms.TabPage tabOrigin;
         private System.Windows.Forms.TabPage tabBW;
@@ -233,6 +302,11 @@
         private System.Windows.Forms.TabPage tabCurve;
         private System.Windows.Forms.PictureBox bwPicBox;
         private System.Windows.Forms.PictureBox edgePicBox;
+        private System.Windows.Forms.Button buttonCalc;
+        private System.Windows.Forms.Label labelLevel;
+        private System.Windows.Forms.TextBox textLevel;
+        private System.Windows.Forms.TrackBar barLevel;
+        private System.Windows.Forms.TextBox textResult;
     }
 }
 

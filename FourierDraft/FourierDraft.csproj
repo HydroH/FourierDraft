@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CurveImg.cs" />
+    <Compile Include="FourierCurve.cs" />
     <Compile Include="mainForm.cs">
       <SubType>Form</SubType>
     </Compile>

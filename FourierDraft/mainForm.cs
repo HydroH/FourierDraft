@@ -14,7 +14,7 @@ namespace FourierDraft
 
         //图片载入
         CurveImg img = new CurveImg();
-        Bitmap bwBmp, edgeBmp;
+        Bitmap bwBmp, edgeBmp, curveBmp;
         private void buttonImportPic_Click(object sender, EventArgs e)
         {
             if (openPic.ShowDialog() == DialogResult.OK)
@@ -106,15 +106,22 @@ namespace FourierDraft
         {
             if (null != originPicBox.Image)
             {
-                FourierCurve[] curves = new FourierCurve[img.EdgeIndex.Count];
                 img.BWConvert(ref bwBmp, barThreshold.Value);
                 edgeBmp = new Bitmap(bwBmp);
                 img.FindEdge(ref edgeBmp);
                 textResult.Text = "";
+                FourierCurve[] curves = new FourierCurve[img.EdgeIndex.Count];
                 for (int i = 0; i <= img.EdgeIndex.Count - 1; i++)
                 {
+                    curves[i] = new FourierCurve();
                     textResult.Text += curves[i].FourierExpand(img.EdgeIndex[i], barLevel.Value);
                 }
+                img.ClearCanvas(ref curveBmp);
+                for (int i = 0; i <= img.EdgeIndex.Count - 1; i++)
+                {
+                    img.DrawCurve(curves[i].CurveCoX, curves[i].CurveCoY, curves[i].Period, ref curveBmp);
+                }
+                curvePicBox.Image = curveBmp;
             }
         }
     }

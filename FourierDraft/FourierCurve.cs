@@ -3,15 +3,28 @@ using System.Collections.Generic;
 
 namespace FourierDraft
 {
+    struct Coefficient
+    {
+        public double sin, cos;
+    }
+
     class FourierCurve
     {
-        struct Coefficient
+        private Coefficient[] curveCoX, curveCoY;
+        public Coefficient[] CurveCoX
         {
-            public double sin, cos;
+            get { return curveCoX; }
+        }
+        public Coefficient[] CurveCoY
+        {
+            get { return curveCoY; }
         }
 
-        private Coefficient[] curveCoX, curveCoY;
         private int period;
+        public int Period
+        {
+            get { return period; }
+        }
         private string resultText;
         public string FourierExpand(List<BmpPoint> curvePoint, int expansionLevel)
         {
@@ -21,13 +34,18 @@ namespace FourierDraft
             curveCoY = new Coefficient[expansionLevel+1];
             curveCoX[0].sin = curvePoint[0].y;
             curveCoY[0].sin = curvePoint[0].x;
+            double tempDouble;
             for (int i = 0; i <= period - 1; i++)
                 for (int j = 1; j <= expansionLevel; j++)
                 {
-                    curveCoX[j].cos += curvePoint[i].x * Math.Cos(2 * Math.PI * (j + 1) * curvePoint[i].x / period);
-                    curveCoX[j].sin += curvePoint[i].x * Math.Sin(2 * Math.PI * (j + 1) * curvePoint[i].x / period);
-                    curveCoY[j].cos += curvePoint[i].y * Math.Cos(2 * Math.PI * (j + 1) * curvePoint[i].y / period);
-                    curveCoY[j].sin += curvePoint[i].y * Math.Sin(2 * Math.PI * (j + 1) * curvePoint[i].y / period);
+                    tempDouble = 2 * Math.PI * (j + 1) * curvePoint[i].x;
+                    tempDouble /= period;
+                    curveCoX[j].cos += curvePoint[i].x * Math.Cos(tempDouble);
+                    curveCoX[j].sin += curvePoint[i].x * Math.Sin(tempDouble);
+                    tempDouble = 2 * Math.PI * (j + 1) * curvePoint[i].y;
+                    tempDouble /= period;
+                    curveCoY[j].cos += curvePoint[i].y * Math.Cos(tempDouble);
+                    curveCoY[j].sin += curvePoint[i].y * Math.Sin(tempDouble);
                 }
 
             resultText = "x = ";

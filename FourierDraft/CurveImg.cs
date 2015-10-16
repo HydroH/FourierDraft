@@ -214,5 +214,39 @@ namespace FourierDraft
                 for (int j = 0; j <= edgeIndex[i].Count - 1; j++)
                     bmp.SetPixel(edgeIndex[i][j].x, edgeIndex[i][j].y, Color.Black);
         }
+
+        //绘制部分
+        //清空画布
+        public void ClearCanvas(ref Bitmap bmp)
+        {
+            bmp = new Bitmap(whiteBmp);
+        }
+        //绘制曲线
+        public void DrawCurve(Coefficient[] curveCoX, Coefficient[] curveCoY, int period, ref Bitmap bmp)
+        {
+            double x;
+            double y;
+            double tempDouble;
+            for (int i = 0; i <= period - 1; i++)
+            { 
+                x = 0;
+                y = 0;
+                for (int j = 0; j <= curveCoX.Length - 1; j++) 
+                {
+                    tempDouble = 2 * Math.PI * j * x;
+                    tempDouble /= period;
+                    x += curveCoX[j].cos * Math.Cos(tempDouble);
+                    x += curveCoX[j].sin * Math.Sin(tempDouble);
+                    tempDouble = 2 * Math.PI * j * y;
+                    tempDouble /= period;
+                    y += curveCoY[j].cos * Math.Cos(tempDouble);
+                    y += curveCoY[j].sin * Math.Sin(tempDouble);
+                }
+                x = -x;
+                y = -y;
+                if ((x < 0) || (x >= bmp.Width) || (y < 0) || (y >= bmp.Height)) continue;
+                bmp.SetPixel((int)x, (int)y, Color.Black);
+            }
+        }
     }
 }

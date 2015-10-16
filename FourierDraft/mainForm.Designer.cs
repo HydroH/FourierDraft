@@ -47,6 +47,7 @@
             this.textLevel = new System.Windows.Forms.TextBox();
             this.barLevel = new System.Windows.Forms.TrackBar();
             this.textResult = new System.Windows.Forms.TextBox();
+            this.curvePicBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.originPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barThreshold)).BeginInit();
             this.tabPicBox.SuspendLayout();
@@ -55,7 +56,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.bwPicBox)).BeginInit();
             this.tabEdge.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edgePicBox)).BeginInit();
+            this.tabCurve.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.barLevel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.curvePicBox)).BeginInit();
             this.SuspendLayout();
             // 
             // originPicBox
@@ -190,6 +193,7 @@
             // tabCurve
             // 
             this.tabCurve.BackColor = System.Drawing.Color.Transparent;
+            this.tabCurve.Controls.Add(this.curvePicBox);
             this.tabCurve.Location = new System.Drawing.Point(4, 26);
             this.tabCurve.Name = "tabCurve";
             this.tabCurve.Padding = new System.Windows.Forms.Padding(3);
@@ -256,6 +260,15 @@
             this.textResult.Size = new System.Drawing.Size(445, 156);
             this.textResult.TabIndex = 10;
             // 
+            // curvePicBox
+            // 
+            this.curvePicBox.Location = new System.Drawing.Point(0, 2);
+            this.curvePicBox.Name = "curvePicBox";
+            this.curvePicBox.Size = new System.Drawing.Size(280, 280);
+            this.curvePicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.curvePicBox.TabIndex = 3;
+            this.curvePicBox.TabStop = false;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -282,7 +295,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.bwPicBox)).EndInit();
             this.tabEdge.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.edgePicBox)).EndInit();
+            this.tabCurve.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.barLevel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.curvePicBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -308,6 +323,7 @@
         private System.Windows.Forms.TextBox textLevel;
         private System.Windows.Forms.TrackBar barLevel;
         private System.Windows.Forms.TextBox textResult;
+        private System.Windows.Forms.PictureBox curvePicBox;
     }
 }
 

@@ -26,10 +26,10 @@ namespace FourierDraft
             get { return period; }
         }
         private string resultText;
-        public string FourierExpand(List<BmpPoint> curvePoint, int expansionLevel)
+        public string FourierExpand(List<BmpPoint> curvePoint, int expansionLevel, int ignoreThres)
         {
             period = curvePoint.Count;
-            if (period <= 6) return "";
+            if (period <= ignoreThres) return "";
             curveCoX = new Coefficient[expansionLevel+1];
             curveCoY = new Coefficient[expansionLevel+1];
             double tempDouble;

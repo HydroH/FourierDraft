@@ -48,6 +48,10 @@
             this.textLevel = new System.Windows.Forms.TextBox();
             this.barLevel = new System.Windows.Forms.TrackBar();
             this.textResult = new System.Windows.Forms.TextBox();
+            this.numAccuracy = new System.Windows.Forms.NumericUpDown();
+            this.labelAccuracy = new System.Windows.Forms.Label();
+            this.labelIgnore = new System.Windows.Forms.Label();
+            this.numIgnore = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.originPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barThreshold)).BeginInit();
             this.tabPicBox.SuspendLayout();
@@ -59,6 +63,8 @@
             this.tabCurve.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.curvePicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barLevel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAccuracy)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numIgnore)).BeginInit();
             this.SuspendLayout();
             // 
             // originPicBox
@@ -215,7 +221,7 @@
             // 
             this.buttonCalc.BackColor = System.Drawing.SystemColors.Control;
             this.buttonCalc.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.buttonCalc.Location = new System.Drawing.Point(314, 134);
+            this.buttonCalc.Location = new System.Drawing.Point(683, 134);
             this.buttonCalc.Name = "buttonCalc";
             this.buttonCalc.Size = new System.Drawing.Size(75, 24);
             this.buttonCalc.TabIndex = 6;
@@ -229,9 +235,9 @@
             this.labelLevel.Font = new System.Drawing.Font("微软雅黑 Light", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.labelLevel.Location = new System.Drawing.Point(310, 96);
             this.labelLevel.Name = "labelLevel";
-            this.labelLevel.Size = new System.Drawing.Size(81, 21);
+            this.labelLevel.Size = new System.Drawing.Size(88, 21);
             this.labelLevel.TabIndex = 9;
-            this.labelLevel.Text = "Accuracy:";
+            this.labelLevel.Text = "Expansion:";
             // 
             // textLevel
             // 
@@ -262,29 +268,85 @@
             this.textResult.AcceptsTab = true;
             this.textResult.BackColor = System.Drawing.Color.White;
             this.textResult.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.textResult.Location = new System.Drawing.Point(314, 171);
+            this.textResult.Location = new System.Drawing.Point(314, 165);
             this.textResult.Multiline = true;
             this.textResult.Name = "textResult";
             this.textResult.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textResult.Size = new System.Drawing.Size(445, 156);
+            this.textResult.Size = new System.Drawing.Size(445, 162);
             this.textResult.TabIndex = 10;
+            // 
+            // numAccuracy
+            // 
+            this.numAccuracy.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.numAccuracy.Location = new System.Drawing.Point(378, 136);
+            this.numAccuracy.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numAccuracy.Name = "numAccuracy";
+            this.numAccuracy.Size = new System.Drawing.Size(52, 23);
+            this.numAccuracy.TabIndex = 11;
+            this.numAccuracy.Value = new decimal(new int[] {
+            10,
+            0,
+            0,
+            0});
+            // 
+            // labelAccuracy
+            // 
+            this.labelAccuracy.AutoSize = true;
+            this.labelAccuracy.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelAccuracy.Location = new System.Drawing.Point(317, 138);
+            this.labelAccuracy.Name = "labelAccuracy";
+            this.labelAccuracy.Size = new System.Drawing.Size(62, 17);
+            this.labelAccuracy.TabIndex = 12;
+            this.labelAccuracy.Text = "Accuracy:";
+            // 
+            // labelIgnore
+            // 
+            this.labelIgnore.AutoSize = true;
+            this.labelIgnore.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.labelIgnore.Location = new System.Drawing.Point(445, 138);
+            this.labelIgnore.Name = "labelIgnore";
+            this.labelIgnore.Size = new System.Drawing.Size(165, 17);
+            this.labelIgnore.TabIndex = 14;
+            this.labelIgnore.Text = "Ignore edges shorter than:";
+            // 
+            // numIgnore
+            // 
+            this.numIgnore.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.numIgnore.Location = new System.Drawing.Point(609, 136);
+            this.numIgnore.Name = "numIgnore";
+            this.numIgnore.Size = new System.Drawing.Size(52, 23);
+            this.numIgnore.TabIndex = 13;
+            this.numIgnore.Value = new decimal(new int[] {
+            6,
+            0,
+            0,
+            0});
             // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(770, 347);
+            this.Controls.Add(this.numAccuracy);
+            this.Controls.Add(this.numIgnore);
+            this.Controls.Add(this.labelIgnore);
+            this.Controls.Add(this.labelAccuracy);
+            this.Controls.Add(this.buttonCalc);
             this.Controls.Add(this.textResult);
             this.Controls.Add(this.labelLevel);
             this.Controls.Add(this.textLevel);
             this.Controls.Add(this.barLevel);
-            this.Controls.Add(this.buttonCalc);
             this.Controls.Add(this.tabPicBox);
             this.Controls.Add(this.labelThreshold);
             this.Controls.Add(this.textThreshold);
             this.Controls.Add(this.barThreshold);
             this.Controls.Add(this.buttonImportPic);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "mainForm";
             this.Text = "Fourier Draft";
             ((System.ComponentModel.ISupportInitialize)(this.originPicBox)).EndInit();
@@ -298,6 +360,8 @@
             this.tabCurve.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.curvePicBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.barLevel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAccuracy)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numIgnore)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -324,6 +388,10 @@
         private System.Windows.Forms.TrackBar barLevel;
         private System.Windows.Forms.TextBox textResult;
         private System.Windows.Forms.PictureBox curvePicBox;
+        private System.Windows.Forms.NumericUpDown numAccuracy;
+        private System.Windows.Forms.Label labelAccuracy;
+        private System.Windows.Forms.Label labelIgnore;
+        private System.Windows.Forms.NumericUpDown numIgnore;
     }
 }
 

@@ -222,12 +222,11 @@ namespace FourierDraft
             bmp = new Bitmap(whiteBmp);
         }
         //绘制曲线
-        public void DrawCurve(Coefficient[] curveCoX, Coefficient[] curveCoY, int period, ref Bitmap bmp)
+        public void DrawCurve(Coefficient[] curveCoX, Coefficient[] curveCoY, int period, ref Bitmap bmp, int accuracy)
         {
             double x, y;
             int intx, inty;
             double tempDouble;
-            const int accuracy = 10;
             for (int i = 0; i <= period * accuracy - 1; i++) 
             {
                 if (null == curveCoX) continue;

@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("FourierDraft")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Fourier Draft")]
+[assembly: AssemblyDescription("Curve Fitting with Fourier Expansion")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FourierDraft")]
-[assembly: AssemblyCopyright("Copyright ©  2015")]
+[assembly: AssemblyCompany("Iodizon Lab.")]
+[assembly: AssemblyProduct("Fourier Draft")]
+[assembly: AssemblyCopyright("Copyleft  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -33,4 +33,4 @@ using System.Runtime.InteropServices;
 // 方法是按如下所示使用“*”: :
 // [assembly: AssemblyVersion("1.0.*")]
 [assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.1")]
+[assembly: AssemblyFileVersion("0.4.2.2")]

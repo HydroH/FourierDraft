@@ -114,12 +114,12 @@ namespace FourierDraft
                 for (int i = 0; i <= img.EdgeIndex.Count - 1; i++)
                 {
                     curves[i] = new FourierCurve();
-                    textResult.Text += curves[i].FourierExpand(img.EdgeIndex[i], barLevel.Value);
+                    textResult.Text += curves[i].FourierExpand(img.EdgeIndex[i], barLevel.Value, (int)numIgnore.Value);
                 }
                 img.ClearCanvas(ref curveBmp);
                 for (int i = 0; i <= img.EdgeIndex.Count - 1; i++)
                 {
-                    img.DrawCurve(curves[i].CurveCoX, curves[i].CurveCoY, curves[i].Period, ref curveBmp);
+                    img.DrawCurve(curves[i].CurveCoX, curves[i].CurveCoY, curves[i].Period, ref curveBmp, (int)numAccuracy.Value);
                 }
                 curvePicBox.Image = curveBmp;
             }

@@ -32,6 +32,17 @@ namespace FourierDraft
             edgePicBox.Image = edgeBmp;
         }
 
+        //保存曲线图片
+        private void buttonSave_Click(object sender, EventArgs e)
+        {
+            if (null == curvePicBox.Image) return;
+            saveCurve.FileName = "Curve Image.png";
+            if (saveCurve.ShowDialog() == DialogResult.OK)
+            {
+                curvePicBox.Image.Save(saveCurve.FileName);
+            }
+        }
+
         //图片框显示
         bool bwShowing = false;
         bool edgeShowing = false;
@@ -92,6 +103,7 @@ namespace FourierDraft
         {
             textLevel.Text = Convert.ToString(barLevel.Value);
         }
+
         private void textLevel_TextChanged(object sender, EventArgs e)
         {
             try

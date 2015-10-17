@@ -52,6 +52,8 @@
             this.labelAccuracy = new System.Windows.Forms.Label();
             this.labelIgnore = new System.Windows.Forms.Label();
             this.numIgnore = new System.Windows.Forms.NumericUpDown();
+            this.buttonSave = new System.Windows.Forms.Button();
+            this.saveCurve = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.originPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barThreshold)).BeginInit();
             this.tabPicBox.SuspendLayout();
@@ -326,11 +328,29 @@
             0,
             0});
             // 
+            // buttonSave
+            // 
+            this.buttonSave.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonSave.Location = new System.Drawing.Point(626, 15);
+            this.buttonSave.Name = "buttonSave";
+            this.buttonSave.Size = new System.Drawing.Size(132, 24);
+            this.buttonSave.TabIndex = 15;
+            this.buttonSave.Text = "Save Curve Image...";
+            this.buttonSave.UseVisualStyleBackColor = true;
+            this.buttonSave.Click += new System.EventHandler(this.buttonSave_Click);
+            // 
+            // saveCurve
+            // 
+            this.saveCurve.FileName = "Curve Image.png";
+            this.saveCurve.Filter = "PNG文件|*.png";
+            this.saveCurve.Title = "Save Curve...";
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(770, 347);
+            this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.numAccuracy);
             this.Controls.Add(this.numIgnore);
             this.Controls.Add(this.labelIgnore);
@@ -393,6 +413,8 @@
         private System.Windows.Forms.Label labelAccuracy;
         private System.Windows.Forms.Label labelIgnore;
         private System.Windows.Forms.NumericUpDown numIgnore;
+        private System.Windows.Forms.Button buttonSave;
+        private System.Windows.Forms.SaveFileDialog saveCurve;
     }
 }
 

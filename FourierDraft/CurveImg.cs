@@ -109,110 +109,87 @@ namespace FourierDraft
         public void PreviewEdge(ref Bitmap bmp, int threshold)
         {
             bmp = new Bitmap(whiteBmp);
-            for (int j = 0; j <= edgePointIndex[threshold].Count - 1; j++)
-                bmp.SetPixel(edgePointIndex[threshold][j].x, edgePointIndex[threshold][j].y, Color.Black);
+            for (int i = 0; i <= edgePointIndex[threshold].Count - 1; i++)
+                bmp.SetPixel(edgePointIndex[threshold][i].x, edgePointIndex[threshold][i].y, Color.Black);
+        }
+
+        //相邻点遍历
+        private BmpPoint GetPoint(BmpPoint point,int i)
+        {
+            switch (i)
+            {
+                case 0: return new BmpPoint(point.x - 1, point.y - 1);
+                case 1: return new BmpPoint(point.x    , point.y - 1);
+                case 2: return new BmpPoint(point.x + 1, point.y - 1);
+                case 3: return new BmpPoint(point.x + 1, point.y    );
+                case 4: return new BmpPoint(point.x + 1, point.y + 1);
+                case 5: return new BmpPoint(point.x    , point.y + 1);
+                case 6: return new BmpPoint(point.x - 1, point.y + 1);
+                case 7: return new BmpPoint(point.x - 1, point.y    );
+                default:return point;
+            }
         }
 
         //判定边缘点
-        private bool IsWhite(ref Bitmap bmp, int x, int y)
+        private bool IsWhite(int x, int y)
         {
-            if (x < 0 || x >= bmp.Width) return true;
-            if (y < 0 || y >= bmp.Height) return true;
+            if (x < 0 || x >= bmpWidth) return true;
+            if (y < 0 || y >= bmpHeight) return true;
             if (!isBlack[x, y]) return true;
             return false;
         }
 
         //查找边缘点
-        private void FindNext(ref Bitmap bmp, ref int x, ref int y, bool[,] visited)
+        private void FindNext(ref int x, ref int y, ref int position, bool[,] isEdge)
         {
-            if (IsWhite(ref bmp, x, y - 1) && !IsWhite(ref bmp, x + 1, y - 1) && !visited[x + 1, y - 1]) 
+            BmpPoint newPoint;
+            for (int i = position + 1; i <= position + 8; i++) 
             {
-                x += 1;
-                y -= 1;
-                return;
-            }
-            if (IsWhite(ref bmp, x + 1, y - 1) && !IsWhite(ref bmp, x + 1, y) && !visited[x + 1, y])
-            {
-                x += 1;
-                return;
-            }
-            if (IsWhite(ref bmp, x + 1, y) && !IsWhite(ref bmp, x + 1, y + 1) && !visited[x + 1, y + 1])
-            {
-                x += 1;
-                y += 1;
-                return;
-            }
-            if (IsWhite(ref bmp, x + 1, y + 1) && !IsWhite(ref bmp, x, y + 1) && !visited[x, y + 1])
-            {
-                y += 1;
-                return;
-            }
-            if (IsWhite(ref bmp, x, y + 1) && !IsWhite(ref bmp, x - 1, y + 1) && !visited[x - 1, y + 1])
-            {
-                x -= 1;
-                y += 1;
-                return;
-            }
-            if (IsWhite(ref bmp, x - 1, y + 1) && !IsWhite(ref bmp, x - 1, y) && !visited[x - 1, y])
-            {
-                x -= 1;
-                return;
-            }
-            if (IsWhite(ref bmp, x - 1, y) && !IsWhite(ref bmp, x - 1, y - 1) && !visited[x - 1, y - 1])
-            {
-                x -= 1;
-                y -= 1;
-                return;
-            }
-            if (IsWhite(ref bmp, x - 1, y - 1) && !IsWhite(ref bmp, x, y - 1) && !visited[x, y - 1])
-            {
-                y -= 1;
-                return;
+                newPoint = GetPoint(new BmpPoint(x, y), i % 8);
+                if ((newPoint.x < 0) || (newPoint.x >= bmpWidth) || (newPoint.y < 0) || (newPoint.y >= bmpHeight)) continue;
+                if (isEdge[newPoint.x,newPoint.y])
+                {
+                    x = newPoint.x;
+                    y = newPoint.y;
+                    position = (i + 4) % 8;
+                    return;
+                }
             }
         }
 
-        //查找单条边缘
-        private void FindSingleEdge(ref Bitmap bmp, int x, int y, ref bool[,] visited)
+        private void FindSingleEdge(int x, int y, ref bool[,] visited, bool[,] isEdge)
         {
-            bool newEdge = true;
             int x0 = x;
             int y0 = y;
-            FindNext(ref bmp, ref x, ref y, visited);
-            if ((x0 == x) && (y0 == y)) return;
-            x = x0;
-            y = y0;
-            while ((isBlack[x, y]) && (!visited[x, y])) 
+            int position = 0;
+            FindNext(ref x, ref y, ref position, isEdge);
+            edgeIndex[edgeIndex.Count - 1].Add(new BmpPoint(x, y));
+            while ((x != x0) || (y != y0))
             {
-                if (newEdge) edgeIndex.Add(new List<BmpPoint>());
-                newEdge = false;
-                visited[x, y] = true;
+                FindNext(ref x, ref y, ref position, isEdge);
                 edgeIndex[edgeIndex.Count - 1].Add(new BmpPoint(x, y));
-                FindNext(ref bmp, ref x, ref y, visited);
-                if ((x0 == x) && (y0 == y)) break;
-                x0 = x;
-                y0 = y;
+                visited[x, y] = true;
             }
         }
 
-        //查找边缘
-        public void FindEdge(ref Bitmap bmp)
+        public void FindEdge(int threshold)
         {
-            edgeIndex = new List<List<BmpPoint>>();
-            int bmpWidth = bmp.Width;
-            int bmpHeight = bmp.Height;
+            int x, y;
             bool[,] visited = new bool[bmpWidth, bmpHeight];
-
-            for (int i = 0; i <= oldThresh - 1; i++)
-                for (int j = 0; j <= greynessIndex[i].Count - 1; j++)
-                    FindSingleEdge(ref bmp, greynessIndex[i][j].x, greynessIndex[i][j].y, ref visited);
-
-            for (int i = 0; i <= bmpWidth - 1; i++)
-                for (int j = 0; j <= bmpHeight - 1; j++)
-                    bmp.SetPixel(i, j, Color.White);
-
-            for (int i = 0; i <= edgeIndex.Count - 1; i++)
-                for (int j = 0; j <= edgeIndex[i].Count - 1; j++)
-                    bmp.SetPixel(edgeIndex[i][j].x, edgeIndex[i][j].y, Color.Black);
+            bool[,] isEdge = new bool[bmpWidth, bmpHeight];
+            edgeIndex = new List<List<BmpPoint>>();
+            for (int i = 0; i <= edgePointIndex[threshold].Count - 1; i++)
+                isEdge[edgePointIndex[threshold][i].x, edgePointIndex[threshold][i].y] = true;
+            for (int i = 0; i <= edgePointIndex[threshold].Count - 1; i++)
+            {
+                x = edgePointIndex[threshold][i].x;
+                y = edgePointIndex[threshold][i].y;
+                if (!visited[x, y])
+                {
+                    edgeIndex.Add(new List<BmpPoint>());
+                    FindSingleEdge(x, y, ref visited, isEdge);
+                }
+            }
         }
 
         //绘制部分

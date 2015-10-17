@@ -108,7 +108,7 @@ namespace FourierDraft
             {
                 img.BWConvert(ref bwBmp, barThreshold.Value);
                 edgeBmp = new Bitmap(bwBmp);
-                img.FindEdge(ref edgeBmp);
+                img.FindEdge(barThreshold.Value);
                 textResult.Text = "";
                 FourierCurve[] curves = new FourierCurve[img.EdgeIndex.Count];
                 for (int i = 0; i <= img.EdgeIndex.Count - 1; i++)

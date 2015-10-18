@@ -145,7 +145,7 @@ namespace FourierDraft
                     curves[i] = new FourierCurve();
                     textResult.Text += curves[i].FourierExpand(img.EdgeIndex[i], barLevel.Value, (int)numIgnore.Value);
                     Application.DoEvents();
-                    progressBar.Value += 1;
+                    progressBar.PerformStep();
                 }
                 img.ClearCanvas(ref curveBmp);
                 for (int i = 0; i <= img.EdgeIndex.Count - 1; i++)

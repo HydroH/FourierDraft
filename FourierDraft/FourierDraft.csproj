@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BmpPoint.cs" />
     <Compile Include="CurveImg.cs" />
     <Compile Include="FourierCurve.cs" />
     <Compile Include="mainForm.cs">

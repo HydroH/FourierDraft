@@ -292,7 +292,7 @@
             this.numAccuracy.Size = new System.Drawing.Size(52, 23);
             this.numAccuracy.TabIndex = 11;
             this.numAccuracy.Value = new decimal(new int[] {
-            10,
+            1,
             0,
             0,
             0});

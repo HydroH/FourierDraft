@@ -4,16 +4,6 @@ using System.Drawing;
 
 namespace FourierDraft
 {
-    struct BmpPoint
-    {
-        public int x, y;
-        public BmpPoint(int i, int j)
-        {
-            x = i;
-            y = j;
-        }
-    }
-
     class CurveImg
     {
         //图像初始化，建立灰度索引&边缘点索引

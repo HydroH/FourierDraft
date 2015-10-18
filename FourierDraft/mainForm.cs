@@ -143,7 +143,7 @@ namespace FourierDraft
                         return;
                     }
                     curves[i] = new FourierCurve();
-                    textResult.Text += curves[i].FourierExpand(img.EdgeIndex[i], barLevel.Value, (int)numIgnore.Value);
+                    textResult.Text += curves[i].FourierExpand(img.EdgeIndex[i], Math.Min(barLevel.Value, img.EdgeIndex[i].Count / 2), (int)numIgnore.Value);
                     Application.DoEvents();
                     progressBar.PerformStep();
                 }

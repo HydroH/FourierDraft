@@ -33,6 +33,7 @@ namespace FourierDraft
             curveCoX = new Coefficient[expansionLevel+1];
             curveCoY = new Coefficient[expansionLevel+1];
             double tempDouble;
+            /*
             for (int i = 0; i <= period - 1; i++)
                 for (int j = 0; j <= expansionLevel; j++)
                 {
@@ -45,7 +46,19 @@ namespace FourierDraft
                     curveCoY[j].cos += curvePoint[i].y * Math.Cos(tempDouble);
                     curveCoY[j].sin += curvePoint[i].y * Math.Sin(tempDouble);
                 }
-
+                */
+            for (int i = 0; i <= expansionLevel; i++)
+                for (int j = 0; j <= period - 1; j++) 
+                {
+                    tempDouble = 2 * Math.PI * i * j;
+                    tempDouble /= period;
+                    curveCoX[i].cos += curvePoint[j].x * Math.Cos(tempDouble);
+                    curveCoX[i].sin += curvePoint[j].x * Math.Sin(tempDouble);
+                    tempDouble = 2 * Math.PI * i * j;
+                    tempDouble /= period;
+                    curveCoY[i].cos += curvePoint[j].y * Math.Cos(tempDouble);
+                    curveCoY[i].sin += curvePoint[j].y * Math.Sin(tempDouble);
+                }
             curveCoX[0].cos *= 2;
             curveCoX[0].cos /= period;
             curveCoY[0].cos *= 2;

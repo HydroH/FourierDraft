@@ -54,6 +54,8 @@
             this.numIgnore = new System.Windows.Forms.NumericUpDown();
             this.buttonSave = new System.Windows.Forms.Button();
             this.saveCurve = new System.Windows.Forms.SaveFileDialog();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.buttonAbort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.originPicBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.barThreshold)).BeginInit();
             this.tabPicBox.SuspendLayout();
@@ -345,11 +347,34 @@
             this.saveCurve.Filter = "PNG文件|*.png";
             this.saveCurve.Title = "Save Curve...";
             // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(12, 333);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(665, 24);
+            this.progressBar.Step = 1;
+            this.progressBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous;
+            this.progressBar.TabIndex = 16;
+            // 
+            // buttonAbort
+            // 
+            this.buttonAbort.BackColor = System.Drawing.SystemColors.Control;
+            this.buttonAbort.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.buttonAbort.Location = new System.Drawing.Point(683, 333);
+            this.buttonAbort.Name = "buttonAbort";
+            this.buttonAbort.Size = new System.Drawing.Size(75, 24);
+            this.buttonAbort.TabIndex = 17;
+            this.buttonAbort.Text = "Abort";
+            this.buttonAbort.UseVisualStyleBackColor = false;
+            this.buttonAbort.Click += new System.EventHandler(this.buttonAbort_Click);
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(770, 347);
+            this.ClientSize = new System.Drawing.Size(770, 361);
+            this.Controls.Add(this.buttonAbort);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.buttonSave);
             this.Controls.Add(this.numAccuracy);
             this.Controls.Add(this.numIgnore);
@@ -415,6 +440,8 @@
         private System.Windows.Forms.NumericUpDown numIgnore;
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.SaveFileDialog saveCurve;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Button buttonAbort;
     }
 }
 

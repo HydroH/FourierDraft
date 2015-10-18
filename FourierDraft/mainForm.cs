@@ -113,27 +113,49 @@ namespace FourierDraft
             catch { };
         }
 
+        bool start;
+        private void buttonAbort_Click(object sender, EventArgs e)
+        {
+            start = false;
+        }
+
         //傅里叶展开
         private void buttonCalc_Click(object sender, EventArgs e)
         {
             if (null != originPicBox.Image)
             {
+                start = true;
                 img.BWConvert(ref bwBmp, barThreshold.Value);
                 edgeBmp = new Bitmap(bwBmp);
                 img.FindEdge(barThreshold.Value);
                 textResult.Text = "";
                 FourierCurve[] curves = new FourierCurve[img.EdgeIndex.Count];
+                progressBar.Value = 0;
+                progressBar.Maximum = img.EdgeIndex.Count;
+                buttonCalc.Enabled = false;
                 for (int i = 0; i <= img.EdgeIndex.Count - 1; i++)
                 {
+                    if (!start)
+                    {
+                        progressBar.Value = 0;
+                        start = true;
+                        buttonCalc.Enabled = true;
+                        return;
+                    }
                     curves[i] = new FourierCurve();
                     textResult.Text += curves[i].FourierExpand(img.EdgeIndex[i], barLevel.Value, (int)numIgnore.Value);
+                    Application.DoEvents();
+                    progressBar.Value += 1;
                 }
                 img.ClearCanvas(ref curveBmp);
                 for (int i = 0; i <= img.EdgeIndex.Count - 1; i++)
                 {
                     img.DrawCurve(curves[i].CurveCoX, curves[i].CurveCoY, curves[i].Period, ref curveBmp, (int)numAccuracy.Value);
+                    Application.DoEvents();
                 }
                 curvePicBox.Image = curveBmp;
+                progressBar.Value = 0;
+                buttonCalc.Enabled = true;
             }
         }
     }
